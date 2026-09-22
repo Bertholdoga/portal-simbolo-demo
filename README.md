@@ -14,6 +14,27 @@ possível evolução da aplicação existente.
 - Não utiliza base de dados real.
 - Foi desenvolvida para validação de conceito e experiência.
 
+## Preview
+
+### Desktop
+
+![Portal Símbolo — Dashboard Desktop](docs/screenshots/dashboard-desktop-light.png)
+
+### Light & Dark Mode
+
+| Light Mode | Dark Mode |
+| --- | --- |
+| ![Dashboard desktop light](docs/screenshots/dashboard-desktop-light.png) | ![Dashboard desktop dark](docs/screenshots/dashboard-desktop-dark.png) |
+
+### Mobile Experience
+
+<p align="center">
+  <img src="docs/screenshots/dashboard-mobile-light.png" width="300">
+  <img src="docs/screenshots/dashboard-mobile-dark.png" width="300">
+</p>
+
+> Demo V1.1 Responsive — interface adaptada para desktop e dispositivos móveis, com suporte para temas claro e escuro.
+
 ## Objetivos
 
 - Melhorar experiência mobile
