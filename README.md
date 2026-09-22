@@ -1,59 +1,127 @@
 # Portal Símbolo
 
-Demo de uma proposta de evolução da aplicação interna da Símbolo, desenvolvida
-com foco em melhor experiência de utilização, responsividade e utilização em
-dispositivos móveis.
+Uma proposta de evolução da experiência digital do portal interno da Símbolo,
+com foco em usabilidade, responsividade e experiência mobile.
 
-## Sobre o projeto
+## Visão geral
 
-Protótipo estático (HTML/CSS/JS, sem dependências) que reimagina a interface
-do portal de técnicos: navegação lateral por categorias, cartões de resumo,
-pills de estado, tema claro/escuro e um layout totalmente responsivo. Todos
-os dados apresentados são fictícios — é uma simulação para demonstração, sem
-ligação a sistemas reais.
+Este repositório contém uma demo/protótipo criada para demonstrar uma
+possível evolução da aplicação existente.
 
-## Objetivo
+- É uma demonstração.
+- Utiliza dados fictícios.
+- Não possui integração com sistemas de produção.
+- Não utiliza base de dados real.
+- Foi desenvolvida para validação de conceito e experiência.
 
-Servir de proposta visual e de interação para validação com a equipa antes de
-qualquer implementação sobre os sistemas reais da empresa.
+## Objetivos
+
+- Melhorar experiência mobile
+- Melhorar organização da informação
+- Facilitar utilização pelos colaboradores
+- Criar interface mais moderna e responsiva
+- Demonstrar possibilidades futuras de evolução
 
 ## Versão atual
 
 Demo V1.1 Responsive
 
-## Funcionalidades
+## Principais funcionalidades
 
-- Login
-- Dashboard
-- Layout responsivo
-- Compatibilidade mobile
-- Menu lateral/drawer mobile
-- Nova despesa
-- Campos condicionais
-- Tema claro e escuro
+- Login demonstrativo
+- Dashboard responsivo
+- Cards de informação
+- Layout adaptado a desktop e mobile
+- Drawer/menu mobile
 - Navegação responsiva
+- Registo de nova despesa
+- Campos condicionais
+- Tema claro
+- Tema escuro
+- Scroll mobile otimizado
+- Interface sem overflow horizontal
 
-## Estrutura de versões
+## Compatibilidade
+
+Desktop
+Tablet
+Mobile
+
+## Estrutura do projeto
 
 **`prototipo/`**
-Ambiente de desenvolvimento.
+Ambiente de desenvolvimento e experimentação.
 
 **`Portal-Simbolo-Demo-V1/`**
-Release V1 congelada.
+Release inicial congelada.
 
 **`Portal-Simbolo-Demo-V1.1/`**
-Versão atual responsiva para demonstração.
+Versão responsiva atualmente utilizada para demonstração.
 
-## Como ver a demo
+**`docs/`**
+Documentação técnica, identidade visual e estudos relacionados.
 
-Abrir `Portal-Simbolo-Demo-V1.1/index.html` num browser. Qualquer
-utilizador/palavra-passe entra — é uma simulação, não liga a nenhuma base de
-dados real.
+## Como executar
 
-## Estado
+Não existe instalação ou build. Basta abrir:
 
-Demo funcional e validada.
+```
+Portal-Simbolo-Demo-V1.1/index.html
+```
+
+num browser moderno.
+
+## Tecnologias
+
+- HTML5
+- CSS3
+- JavaScript
+- Responsive Web Design
+
+## Validação V1.1
+
+- Login mobile validado
+- Dashboard mobile validado
+- Layout responsivo validado
+- Drawer mobile validado
+- Navegação validada
+- Modal Nova Despesa validado
+- Campos condicionais validados
+- Tema claro/escuro validado
+- Sem overflow horizontal
+- Scroll vertical funcional
+
+**Estado**: Aprovado para demonstração.
+
+## Roadmap
+
+Possibilidades futuras de evolução — **não são funcionalidades existentes**:
+
+- Autenticação real
+- Integração com API/backend
+- Persistência de dados
+- Gestão de permissões
+- Dashboard com dados reais
+- Upload e gestão documental
+- Melhorias de acessibilidade
+- Testes automatizados
+- PWA/mobile experience
+
+## Histórico de versões
+
+### V1
+Primeira versão funcional da proposta.
+
+**Status**: Frozen / Release congelada.
+
+### V1.1
+Melhorias de responsividade, experiência mobile e navegação.
+
+**Status**: Current Demo.
 
 ## Autor
 
 Gabriel Mota
+
+Projeto desenvolvido por iniciativa própria como proposta de melhoria da
+experiência digital.
