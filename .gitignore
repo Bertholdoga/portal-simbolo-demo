@@ -1,0 +1,20 @@
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Ambientes / segredos (o projeto não usa nenhum atualmente, mas protege por precaução)
+.env
+.env.*
+
+# Dependências (o projeto é HTML/CSS/JS sem build, mas protege por precaução)
+node_modules/
+
+# Logs
+*.log
+
+# Editores/IDE
+.vscode/
+.idea/
+
+# Backup redundante — duplica Portal-Simbolo-Demo-V1/ (ver auditoria)
+Portal-Simbolo-Demo-V1.zip

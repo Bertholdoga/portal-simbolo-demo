@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portal Simbolo²</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4f6f8;
+    --surface:#ffffff;
+    --surface-2:#eef1f5;
+    --ink:#151f2b;
+    --muted:#5c6b7a;
+    --muted-2:#8492a1;
+    --border:#dde3ea;
+    --accent:#0e7c86;
+    --accent-hover:#0b6169;
+    --accent-ink:#ffffff;
+    --accent-soft:#e2f3f2;
+    --accent-2:#2f5f8a;
+    --success:#1c8a5a;
+    --success-soft:#e3f6ec;
+    --warning:#b6790a;
+    --warning-soft:#fbf0dc;
+    --danger:#c53c3c;
+    --danger-soft:#fbe7e7;
+    --info:#2f6feb;
+    --info-soft:#e8eefd;
+    /* Sidebar — clara no Light Mode, navy no Dark Mode (segue o mesmo mecanismo de tema da app) */
+    --sidebar-bg:#f3f7fa;
+    --sidebar-surface:#e7eef4;
+    --sidebar-border:#d8e1ea;
+    --sidebar-text:#151f2b;
+    --sidebar-text-muted:#5c6b7a;
+    --sidebar-icon:#5c6b7a;
+    --sidebar-active-bg:#e2f3f2;
+    --sidebar-active-text:#0b6169;
+    --sidebar-active-icon:#0e7c86;
+    --shadow-sm:0 1px 2px rgba(20,30,40,.07);
+    --shadow-md:0 8px 24px -12px rgba(20,30,40,.18);
+    --radius-lg:16px;
+    --radius-md:12px;
+    --radius-sm:8px;
+    --radius-pill:999px;
+    --space-1:4px;
+    --space-2:8px;
+    --space-3:12px;
+    --space-4:16px;
+    --space-5:24px;
+    --space-6:32px;
+    --space-7:40px;
+    --space-8:48px;
+    color-scheme:light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0d151c;
+      --surface:#131e27;
+      --surface-2:#182430;
+      --ink:#e8edf2;
+      --muted:#96a5b3;
+      --muted-2:#6f7f8f;
+      --border:#243342;
+      --accent:#43bcb4;
+      --accent-hover:#5bcac2;
+      --accent-ink:#062522;
+      --accent-soft:rgba(67,188,180,.15);
+      --accent-2:#7fa8d4;
+      --success:#42d190;
+      --success-soft:rgba(66,209,144,.14);
+      --warning:#e3ab4a;
+      --warning-soft:rgba(227,171,74,.14);
+      --danger:#e57972;
+      --danger-soft:rgba(229,121,114,.14);
+      --info:#7ea6f5;
+      --info-soft:rgba(126,166,245,.14);
+      --sidebar-bg:#0e1c30;
+      --sidebar-surface:#16283f;
+      --sidebar-border:#21324a;
+      --sidebar-text:#eef3f8;
+      --sidebar-text-muted:#8fa3bd;
+      --sidebar-icon:#8fa3bd;
+      --sidebar-active-bg:#0e7c86;
+      --sidebar-active-text:#ffffff;
+      --sidebar-active-icon:#ffffff;
+      --shadow-sm:0 1px 2px rgba(0,0,0,.5);
+      --shadow-md:0 8px 28px -12px rgba(0,0,0,.6);
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0d151c;
+    --surface:#131e27;
+    --surface-2:#182430;
+    --ink:#e8edf2;
+    --muted:#96a5b3;
+    --muted-2:#6f7f8f;
+    --border:#243342;
+    --accent:#43bcb4;
+    --accent-hover:#5bcac2;
+    --accent-ink:#062522;
+    --accent-soft:rgba(67,188,180,.15);
+    --accent-2:#7fa8d4;
+    --success:#42d190;
+    --success-soft:rgba(66,209,144,.14);
+    --warning:#e3ab4a;
+    --warning-soft:rgba(227,171,74,.14);
+    --danger:#e57972;
+    --danger-soft:rgba(229,121,114,.14);
+    --info:#7ea6f5;
+    --info-soft:rgba(126,166,245,.14);
+    --sidebar-bg:#0e1c30;
+    --sidebar-surface:#16283f;
+    --sidebar-border:#21324a;
+    --sidebar-text:#eef3f8;
+    --sidebar-text-muted:#8fa3bd;
+    --sidebar-icon:#8fa3bd;
+    --sidebar-active-bg:#0e7c86;
+    --sidebar-active-text:#ffffff;
+    --sidebar-active-icon:#ffffff;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.5);
+    --shadow-md:0 8px 28px -12px rgba(0,0,0,.6);
+    color-scheme:dark;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"IBM Plex Sans",-apple-system,Segoe UI,sans-serif;
+    font-size:14px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,.btn{
+    font-family:"Sora","IBM Plex Sans",sans-serif;
+  }
+  h1,h2,h3{text-wrap:balance; margin:0;}
+  .num,td.num,.stat-value,input[type=date],time{font-family:"IBM Plex Mono","IBM Plex Sans",monospace; font-variant-numeric:tabular-nums;}
+  a{color:var(--accent);}
+  button{font:inherit;}
+
+  /* ---------- Foco (acessibilidade) ---------- */
+  a:focus-visible, button:focus-visible, [tabindex]:focus-visible{
+    outline:2px solid var(--accent); outline-offset:2px; border-radius:var(--radius-sm);
+  }
+
+  /* ---------- Layout shell ---------- */
+  #app{min-height:100vh; min-height:100dvh;}
+  .hidden{display:none !important;}
+
+  /* ---------- Login ---------- */
+  .login-wrap{
+    min-height:100vh; min-height:100dvh;
+    display:flex; align-items:center; justify-content:center;
+    padding:var(--space-6); background:var(--bg);
+  }
+  .login-card{
+    width:100%; max-width:880px;
+    display:grid; grid-template-columns:1.05fr 1fr;
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    overflow:hidden;
+  }
+  .login-brand{
+    background:linear-gradient(155deg,var(--accent-2) 0%, var(--accent) 100%);
+    color:#fff; padding:44px 40px; display:flex; flex-direction:column; justify-content:space-between;
+    gap:var(--space-6);
+  }
+  /* Marca oficial Símbolo² — logo em PNG, nunca recriada em CSS/SVG.
+     Duas variantes prontas (dark/light) escolhem-se pela cor de fundo — sem caixa, sem filtro. */
+  .brand-logo{
+    display:inline-flex; align-items:center; justify-content:center;
+    background:transparent; border:none; box-shadow:none; line-height:0;
+  }
+  .brand-logo img{display:block; height:auto; width:150px; max-width:100%; object-fit:contain;}
+  /* Troca de variante da logo por tema — mesmo mecanismo (data-theme / prefers-color-scheme) dos tokens de cor.
+     Por omissão (sem [data-theme]), assume-se claro; o media query cobre "sistema" quando o SO está em escuro. */
+  .brand-logo .brand-logo-light{display:none;}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .brand-logo .brand-logo-dark{display:none;}
+    :root:not([data-theme="light"]) .brand-logo .brand-logo-light{display:block;}
+  }
+  :root[data-theme="dark"] .brand-logo .brand-logo-dark{display:none;}
+  :root[data-theme="dark"] .brand-logo .brand-logo-light{display:block;}
+  .login-brand h1{font-size:28px; font-weight:700; line-height:1.25;}
+  .login-brand p{color:rgba(255,255,255,.82); max-width:34ch; margin:10px 0 0;}
+  .login-brand ul{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:var(--space-3); font-size:13px; color:rgba(255,255,255,.9);}
+  .login-brand li{display:flex; gap:10px; align-items:flex-start;}
+  .login-brand li svg{flex:none; margin-top:2px;}
+  .login-foot{font-size:12px; color:rgba(255,255,255,.65);}
+  .login-form{padding:44px 40px; display:flex; flex-direction:column; justify-content:center; gap:22px;}
+  .login-form h2{font-size:21px; font-weight:600;}
+  .login-form p.sub{color:var(--muted); margin:6px 0 0; font-size:13px;}
+  .field{display:flex; flex-direction:column; gap:6px;}
+  .field label{font-size:12.5px; font-weight:600; color:var(--muted);}
+  .field .input-wrap{position:relative;}
+  .field input{
+    width:100%; padding:11px 13px; border:1px solid var(--border); border-radius:var(--radius-sm);
+    background:var(--surface); color:var(--ink); font-size:14px; transition:border-color .15s, box-shadow .15s;
+  }
+  .field input::placeholder{color:var(--muted-2);}
+  .field input:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft);}
+  .eye-toggle{
+    position:absolute; right:8px; top:50%; transform:translateY(-50%);
+    background:none; border:none; color:var(--muted); cursor:pointer; padding:6px; display:flex; border-radius:6px;
+  }
+  .eye-toggle:hover{color:var(--ink); background:var(--surface-2);}
+  .row-between{display:flex; align-items:center; justify-content:space-between; font-size:12.5px;}
+  .checkbox-row{display:flex; align-items:center; gap:7px; color:var(--muted);}
+  .checkbox-row input{accent-color:var(--accent);}
+  .link-quiet{color:var(--accent); text-decoration:none; font-weight:500;}
+  .link-quiet:hover{text-decoration:underline;}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    border-radius:var(--radius-sm); border:1px solid transparent; cursor:pointer;
+    font-weight:600; font-size:13.5px; padding:11px 18px; transition:background .15s,border-color .15s,color .15s,transform .05s;
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:var(--accent); color:var(--accent-ink);}
+  .btn-primary:hover{background:var(--accent-hover);}
+  .btn-block{width:100%;}
+  .btn-ghost{background:transparent; color:var(--ink); border-color:var(--border);}
+  .btn-ghost:hover{background:var(--surface-2);}
+  .btn-soft{background:var(--accent-soft); color:var(--accent);}
+  .btn-soft:hover{filter:brightness(0.97);}
+  .btn-danger-soft{background:var(--danger-soft); color:var(--danger);}
+  .btn-icon{padding:9px; border-radius:var(--radius-sm);}
+  .btn-sm{padding:7px 12px; font-size:12.5px;}
+  .btn:disabled,.btn[disabled]{opacity:.5; cursor:not-allowed; pointer-events:none;}
+  .btn.is-loading{opacity:.85; pointer-events:none;}
+  .btn.is-loading::after{
+    content:""; display:inline-block; width:13px; height:13px; margin-left:2px; vertical-align:-2px;
+    border:2px solid currentColor; border-top-color:transparent; border-radius:50%;
+    animation:dzspin .7s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce){ .btn.is-loading::after{animation:none;} }
+  .helper-error{font-size:12.5px; color:var(--danger); display:none;}
+  .helper-error.show{display:block;}
+  .demo-note{font-size:12px; color:var(--muted-2); background:var(--surface-2); border:1px dashed var(--border); border-radius:var(--radius-sm); padding:9px 11px;}
+
+  /* ---------- Shell ---------- */
+  .shell{display:grid; grid-template-columns:248px 1fr; min-height:100vh; min-height:100dvh;}
+  .sidebar{
+    background:var(--sidebar-bg); border-right:1px solid var(--sidebar-border);
+    display:flex; flex-direction:column; padding:20px 14px; gap:18px;
+    position:sticky; top:0; height:100vh; height:100dvh; overflow-y:auto;
+    transition:background-color .15s, border-color .15s;
+  }
+  .sidebar .brand-logo{margin:0 6px 4px;}
+  .nav-group{display:flex; flex-direction:column; gap:2px;}
+  .nav-heading{font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--sidebar-text-muted); padding:14px 10px 6px;}
+  .nav-link{
+    display:flex; align-items:center; gap:10px; padding:9px 10px; border-radius:var(--radius-sm);
+    color:var(--sidebar-text-muted); text-decoration:none; font-size:13.5px; font-weight:500; cursor:pointer; border:1px solid transparent;
+    transition:background-color .15s, color .15s;
+  }
+  .nav-link svg{flex:none; color:var(--sidebar-icon); transition:color .15s;}
+  .nav-link:hover{background:var(--sidebar-surface); color:var(--sidebar-text);}
+  .nav-link:hover svg{color:var(--sidebar-text);}
+  .nav-link.active{background:var(--sidebar-active-bg); color:var(--sidebar-active-text); font-weight:600;}
+  .nav-link.active svg{color:var(--sidebar-active-icon);}
+  .nav-link .badge-count{
+    margin-left:auto; font-size:11px; font-weight:700; background:var(--sidebar-surface); color:var(--sidebar-text-muted);
+    border-radius:var(--radius-pill); padding:1px 7px;
+  }
+  .nav-link.active .badge-count{background:var(--sidebar-active-text); color:var(--sidebar-active-bg);}
+  .sidebar-foot{margin-top:auto; border-top:1px solid var(--sidebar-border); padding-top:12px; display:flex; flex-direction:column; gap:2px;}
+  .user-chip{display:flex; align-items:center; gap:10px; padding:8px 8px 12px;}
+  .avatar{
+    width:34px; height:34px; border-radius:50%; background:var(--accent); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; flex:none;
+  }
+  .user-chip .name{font-size:13px; font-weight:600; color:var(--sidebar-text);}
+  .user-chip .role{font-size:11.5px; color:var(--sidebar-text-muted);}
+
+  .shell-main{display:flex; flex-direction:column; min-width:0;}
+  .topbar{
+    display:none; align-items:center; gap:12px; padding:14px 18px; border-bottom:1px solid var(--border);
+    background:var(--surface); position:sticky; top:0; z-index:5;
+  }
+  .content{padding:28px 32px 60px; display:flex; flex-direction:column; gap:22px; max-width:1180px; width:100%; margin:0 auto;}
+  .view{display:flex; flex-direction:column; gap:22px;}
+
+  .page-head{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap;}
+  .page-head .eyebrow{font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); margin:0 0 4px;}
+  .page-head h1{font-size:24px; font-weight:700;}
+  .page-head p.desc{color:var(--muted); margin:6px 0 0; max-width:56ch; font-size:13.5px;}
+  .head-actions{display:flex; gap:10px; flex-wrap:wrap;}
+
+  /* ---------- Stat tiles ---------- */
+  .stat-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px;}
+  .stat-tile{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md);
+    padding:16px 18px; display:flex; flex-direction:column; gap:6px;
+  }
+  .stat-tile .stat-label{font-size:12px; font-weight:600; color:var(--muted); display:flex; align-items:center; gap:7px;}
+  .stat-tile .stat-value{font-size:24px; font-weight:600; color:var(--ink);}
+  .stat-tile .stat-sub{font-size:12px; color:var(--muted-2);}
+  .stat-tile.accent{border-color:transparent; background:linear-gradient(155deg,var(--accent-2),var(--accent)); color:#fff;}
+  .stat-tile.accent .stat-label,.stat-tile.accent .stat-sub{color:rgba(255,255,255,.82);}
+  .stat-tile.accent .stat-value{color:#fff;}
+  .icon-chip{width:26px; height:26px; border-radius:7px; background:var(--accent-soft); color:var(--accent); display:flex; align-items:center; justify-content:center;}
+
+  /* ---------- Cards / panels ---------- */
+  .panel{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md); overflow:hidden;}
+  .panel-head{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 18px; border-bottom:1px solid var(--border); flex-wrap:wrap;}
+  .panel-head h2{font-size:15.5px; font-weight:600;}
+  .panel-head .panel-sub{font-size:12px; color:var(--muted); margin-top:2px;}
+  .panel-body{padding:18px;}
+
+  .doc-action{
+    display:flex; align-items:center; gap:14px; padding:16px 18px; border:1px solid var(--border);
+    border-radius:var(--radius-md); background:var(--surface); text-decoration:none; color:var(--ink);
+    transition:border-color .15s, box-shadow .15s;
+  }
+  .doc-action:hover{border-color:var(--accent);}
+  .doc-action .icon-chip{width:38px; height:38px; border-radius:10px;}
+  .doc-action .doc-title{font-weight:600; font-size:14px;}
+  .doc-action .doc-sub{font-size:12.5px; color:var(--muted);}
+  .doc-action .go{margin-left:auto; color:var(--muted-2);}
+
+  /* ---------- Toolbar / table ---------- */
+  .toolbar{display:flex; align-items:center; gap:10px; padding:14px 18px; flex-wrap:wrap; border-bottom:1px solid var(--border);}
+  .search-box{position:relative; flex:1; min-width:180px; max-width:320px;}
+  .search-box svg{position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--muted-2);}
+  .search-box input{width:100%; padding:8px 10px 8px 32px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--bg); color:var(--ink); font-size:13px;}
+  .search-box input:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft);}
+  .select-inline{padding:7px 9px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--bg); color:var(--ink); font-size:12.5px;}
+  .spacer{flex:1;}
+
+  .table-scroll{overflow-x:auto;}
+  table{width:100%; border-collapse:collapse; font-size:13px; min-width:560px;}
+  thead th{
+    text-align:left; padding:10px 18px; font-size:11.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+    color:var(--muted); background:var(--surface-2); white-space:nowrap; cursor:pointer; user-select:none;
+  }
+  thead th .arrows{opacity:.5; font-size:10px; margin-left:4px;}
+  tbody td{padding:12px 18px; border-top:1px solid var(--border); vertical-align:middle;}
+  tbody tr:hover{background:var(--surface-2);}
+  td.num{text-align:right;}
+  th.num{text-align:right;}
+  .empty-row td{text-align:center; color:var(--muted-2); padding:36px 18px;}
+  .row-actions{display:flex; gap:6px; justify-content:flex-end;}
+  .icon-btn{
+    width:30px; height:30px; border-radius:8px; border:1px solid var(--border); background:var(--surface);
+    color:var(--muted); display:inline-flex; align-items:center; justify-content:center; cursor:pointer;
+  }
+  .icon-btn:hover{color:var(--ink); background:var(--surface-2);}
+  /* Ações por linha ficam discretas em repouso, sem competir com os dados; surgem ao passar o rato pela linha ou ao focar. */
+  .row-actions .icon-btn{opacity:.5; border-color:transparent; background:transparent; transition:opacity .12s,border-color .12s,background .12s;}
+  tbody tr:hover .row-actions .icon-btn,
+  .row-actions .icon-btn:hover,
+  .row-actions .icon-btn:focus-visible{
+    opacity:1; border-color:var(--border); background:var(--surface);
+  }
+
+  /* Saldo e registos — hierarquia de leitura da linha: Movimento e Valor têm mais peso que Documento (secundário). */
+  #tbl-despesas tbody td:nth-child(2){font-weight:600; color:var(--ink);}
+  #tbl-despesas tbody td:nth-child(3){color:var(--muted);}
+  #tbl-despesas tbody td:nth-child(4){font-weight:600;}
+
+  .pill{display:inline-flex; align-items:center; gap:5px; padding:3px 10px; border-radius:var(--radius-pill); font-size:11.5px; font-weight:600;}
+  .pill::before{content:""; width:6px; height:6px; border-radius:50%; background:currentColor;}
+  .pill.ok{background:var(--success-soft); color:var(--success);}
+  .pill.pending{background:var(--warning-soft); color:var(--warning);}
+  .pill.bad{background:var(--danger-soft); color:var(--danger);}
+  .pill.neutral{background:var(--surface-2); color:var(--muted);}
+
+  .pager{display:flex; align-items:center; justify-content:space-between; padding:12px 18px; flex-wrap:wrap; gap:10px;}
+  .pager .pager-info{font-size:12px; color:var(--muted);}
+  .pager .pager-btns{display:flex; gap:8px;}
+
+  .year-tabs{display:flex; gap:var(--space-2); flex-wrap:wrap;}
+  .year-tab{
+    display:flex; align-items:center; gap:8px; padding:8px 14px; border-radius:var(--radius-pill); border:1px solid var(--border);
+    background:var(--surface); color:var(--muted); font-size:13px; font-weight:600; cursor:pointer;
+  }
+  .year-tab .n{font-family:"IBM Plex Mono",monospace; font-size:11.5px; background:var(--surface-2); color:var(--muted); padding:1px 7px; border-radius:var(--radius-pill);}
+  .year-tab.active{border-color:var(--accent); color:var(--accent); background:var(--accent-soft);}
+  .year-tab.active .n{background:var(--accent); color:var(--accent-ink);}
+
+  .month-tabs{display:flex; gap:6px; flex-wrap:wrap;}
+  .month-tab{
+    padding:8px 14px; border-radius:var(--radius-pill); border:1px solid var(--border); background:var(--surface);
+    color:var(--muted); font-size:13px; font-weight:600; cursor:pointer;
+  }
+  .month-tab.active{border-color:var(--accent); color:var(--accent); background:var(--accent-soft);}
+  .month-tab.today{box-shadow:0 0 0 2px var(--accent-soft) inset;}
+
+  /* ---------- Modal (native dialog) ---------- */
+  dialog{
+    border:none; border-radius:var(--radius-lg); padding:0; width:min(520px,92vw); max-height:88vh;
+    background:var(--surface); color:var(--ink); box-shadow:var(--shadow-md);
+  }
+  dialog::backdrop{background:rgba(10,16,22,.5); backdrop-filter:blur(1px);}
+  .modal-head{display:flex; align-items:center; justify-content:space-between; padding:18px 20px; border-bottom:1px solid var(--border);}
+  .modal-head h3{font-family:"Sora","IBM Plex Sans",sans-serif; font-size:16px; font-weight:600;}
+  .modal-body{padding:20px; display:flex; flex-direction:column; gap:var(--space-4); overflow-y:auto; max-height:60vh;}
+  .modal-foot{display:flex; justify-content:flex-end; gap:10px; padding:16px 20px; border-top:1px solid var(--border);}
+  .field-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .field textarea{width:100%; padding:11px 13px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--surface); color:var(--ink); font-family:inherit; font-size:13.5px; resize:vertical; min-height:70px;}
+  .field textarea:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft);}
+  .field select{width:100%; padding:11px 13px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--surface); color:var(--ink); font-size:13.5px;}
+  .field select:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft);}
+  .field-static{padding:10px 13px; border-radius:var(--radius-sm); background:var(--surface-2); color:var(--muted); font-size:13px;}
+  .dropzone{
+    border:1.5px dashed var(--border); border-radius:var(--radius-sm); padding:20px; text-align:center;
+    color:var(--muted); font-size:12.5px; background:var(--bg); cursor:pointer;
+  }
+  .dropzone:hover, .dropzone:focus-visible{border-color:var(--accent); color:var(--accent);}
+  .dropzone.drag{border-color:var(--accent); color:var(--accent); background:var(--accent-soft);}
+  .dropzone.scanning{pointer-events:none;}
+  .dropzone svg{margin-bottom:6px;}
+  .dz-hint{font-size:11px; color:var(--muted-2); margin-top:4px;}
+  .dz-spinner{width:22px; height:22px; margin:0 auto 8px; border:2.5px solid var(--border); border-top-color:var(--accent); border-radius:50%; animation:dzspin .8s linear infinite;}
+  @media (prefers-reduced-motion: reduce){ .dz-spinner{animation:none; border-top-color:var(--border);} }
+  @keyframes dzspin{to{transform:rotate(360deg);}}
+  .dz-file-chip{display:flex; align-items:center; justify-content:center; gap:10px;}
+  .dz-file-chip svg{margin:0; color:var(--success); flex:none;}
+  .dz-file-name{font-weight:600; color:var(--ink); font-size:12.5px;}
+  .dz-replace{background:none; border:none; padding:0; font-size:11.5px; color:var(--accent); text-decoration:underline; cursor:pointer; font-weight:500;}
+  .autofill-banner{
+    display:flex; align-items:flex-start; gap:var(--space-2); background:var(--info-soft); color:var(--info);
+    border-radius:var(--radius-sm); padding:10px 12px; font-size:12px; line-height:1.45;
+  }
+  .form-section-label{
+    font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted-2);
+    padding-top:var(--space-3); border-top:1px solid var(--border);
+  }
+  #d-valor{font-family:"IBM Plex Mono","IBM Plex Sans",monospace; font-variant-numeric:tabular-nums; font-weight:600;}
+  .autofill-banner svg{flex:none; margin-top:2px;}
+  .auto-tag{
+    font-size:9.5px; font-weight:700; color:var(--accent); background:var(--accent-soft); padding:2px 7px;
+    border-radius:var(--radius-pill); margin-left:7px; text-transform:uppercase; letter-spacing:.04em; vertical-align:1px;
+  }
+  .field input.just-filled, .field select.just-filled{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft);}
+
+  .strength-bar{height:5px; border-radius:var(--radius-pill); background:var(--surface-2); overflow:hidden;}
+  .strength-bar span{display:block; height:100%; width:0%; background:var(--danger); transition:width .2s, background .2s;}
+  .strength-label{font-size:11.5px; color:var(--muted);}
+
+  .toast{
+    position:fixed; bottom:22px; right:22px; background:var(--ink); color:var(--bg); padding:12px 16px; border-radius:var(--radius-sm);
+    font-size:13px; font-weight:500; box-shadow:var(--shadow-md); display:flex; align-items:center; gap:10px;
+    transform:translateY(12px); opacity:0; pointer-events:none; transition:transform .2s, opacity .2s; z-index:50;
+  }
+  .toast.show{transform:translateY(0); opacity:1;}
+  .toast svg{flex:none;}
+  #toast-icon-success{color:var(--success);}
+  #toast-icon-info{color:var(--info);}
+  @media (prefers-reduced-motion: reduce){ .toast{transition:none;} }
+
+  .theme-toggle{
+    display:inline-flex; align-items:center; gap:6px; border:1px solid var(--border); background:var(--surface);
+    border-radius:var(--radius-pill); padding:4px; cursor:pointer;
+  }
+  .theme-toggle button{
+    border:none; background:none; color:var(--muted); border-radius:var(--radius-pill); width:28px; height:28px; display:flex; align-items:center; justify-content:center; cursor:pointer;
+  }
+  .theme-toggle button.active{background:var(--accent); color:var(--accent-ink);}
+
+  .hint-row{display:flex; align-items:flex-start; gap:var(--space-2); font-size:12px; color:var(--muted-2);}
+  .kbd{font-family:"IBM Plex Mono",monospace; background:var(--surface-2); border:1px solid var(--border); border-radius:5px; padding:1px 5px; font-size:11px;}
+
+  @media (max-width: 900px){
+    .shell{grid-template-columns:1fr;}
+    .sidebar{
+      position:fixed; inset:0 auto 0 0; width:250px; transform:translateX(-100%); transition:transform .2s; z-index:30;
+      box-shadow:var(--shadow-md);
+    }
+    .sidebar.open{transform:translateX(0);}
+    .topbar{display:flex;}
+    .content{padding:20px 16px 48px;}
+    .login-card{grid-template-columns:1fr;}
+    .login-brand{padding:32px 24px;}
+    .login-form{padding:32px 24px;}
+    .field-grid{grid-template-columns:1fr;}
+    .scrim{position:fixed; inset:0; background:rgba(10,16,22,.4); z-index:25;}
+  }
+</style>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ===================== LOGIN ===================== -->
+  <section class="login-wrap" id="view-login">
+    <div class="login-card">
+      <div class="login-brand">
+        <div>
+          <span class="brand-logo"><img src="assets/logo-simbolo-light.png" alt="Símbolo²" style="width:210px;"></span>
+          <h1 style="margin-top:40px;">Portal de Técnicos</h1>
+          <p>Férias, faltas, presenças, despesas e emissão de documentos — tudo num único lugar, pensado para o dia a dia em campo.</p>
+        </div>
+        <ul>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Pedidos de férias e faltas com estado em tempo real
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Registo de despesas com comprovativo fotográfico
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Emissão imediata de documentos de transporte
+          </li>
+        </ul>
+        <div class="login-foot">© 2026 Simbolo² · Gabriel Mota</div>
+      </div>
+      <form class="login-form" id="login-form" autocomplete="off">
+        <div>
+          <h2>Iniciar sessão</h2>
+          <p class="sub">Aceda com as suas credenciais de técnico.</p>
+        </div>
+        <div class="field">
+          <label for="login-user">Utilizador</label>
+          <div class="input-wrap">
+            <input id="login-user" type="text" placeholder="ex. gmota" value="gmota" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="login-pass">Palavra-passe</label>
+          <div class="input-wrap">
+            <input id="login-pass" type="password" placeholder="••••••••" value="••••••••••" />
+            <button type="button" class="eye-toggle" id="toggle-pass" aria-label="Mostrar palavra-passe">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/></svg>
+            </button>
+          </div>
+          <span class="helper-error" id="login-error">Utilizador ou palavra-passe incorretos.</span>
+        </div>
+        <div class="row-between">
+          <label class="checkbox-row"><input type="checkbox" checked /> Manter sessão iniciada</label>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+        <div class="demo-note">Protótipo de demonstração — qualquer utilizador/palavra-passe entra. Dados apresentados são fictícios.</div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===================== APP SHELL ===================== -->
+  <div class="shell hidden" id="shell">
+    <div class="scrim hidden" id="scrim"></div>
+    <aside class="sidebar" id="sidebar">
+      <span class="brand-logo">
+        <img class="brand-logo-dark" src="assets/logo-simbolo-dark.png" alt="Símbolo²">
+        <img class="brand-logo-light" src="assets/logo-simbolo-light.png" alt="Símbolo²">
+      </span>
+
+      <nav class="nav-group">
+        <a class="nav-link" data-route="dashboard">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="9" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="14" y="3" width="7" height="5" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="14" y="12" width="7" height="9" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="16" width="7" height="5" rx="1.5" stroke="currentColor" stroke-width="1.7"/></svg>
+          Painel
+        </a>
+
+        <div class="nav-heading">Gestão de pessoal</div>
+        <a class="nav-link" data-route="ferias">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          Férias
+        </a>
+        <a class="nav-link" data-route="faltas">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M9 9l6 6M15 9l-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          Faltas
+        </a>
+        <a class="nav-link" data-route="presenca">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          Presenças
+        </a>
+
+        <div class="nav-heading">Despesas</div>
+        <a class="nav-link" data-route="despesas">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="6" width="19" height="13" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M2.5 10h19" stroke="currentColor" stroke-width="1.7"/><circle cx="7" cy="14.5" r="1.1" fill="currentColor"/></svg>
+          Saldo e registos
+        </a>
+        <a class="nav-link" data-route="extrato">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Extrato mensal
+        </a>
+
+        <div class="nav-heading">Documentos</div>
+        <a class="nav-link" data-route="documentos">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M7 3h7l5 5v13a1 1 0 01-1 1H7a1 1 0 01-1-1V4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 3v5h5" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          Emissão de documentos
+        </a>
+      </nav>
+
+      <div class="sidebar-foot">
+        <a class="nav-link" data-route="password">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 10V7a4 4 0 118 0v3" stroke="currentColor" stroke-width="1.7"/></svg>
+          Alterar palavra-passe
+        </a>
+        <a class="nav-link" id="logout-link">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M15 17l5-5-5-5M20 12H9M13 21H6a2 2 0 01-2-2V5a2 2 0 012-2h7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Terminar sessão
+        </a>
+        <div class="user-chip">
+          <div class="avatar">GM</div>
+          <div>
+            <div class="name">Gabriel Mota</div>
+            <div class="role">Técnico de campo</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="shell-main">
+      <header class="topbar">
+        <button class="icon-btn" id="menu-toggle" aria-label="Abrir menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <span class="brand-logo">
+          <img class="brand-logo-dark" src="assets/logo-simbolo-dark.png" alt="Símbolo²" style="width:96px;">
+          <img class="brand-logo-light" src="assets/logo-simbolo-light.png" alt="Símbolo²" style="width:96px;">
+        </span>
+      </header>
+
+      <main class="content">
+
+        <!-- DASHBOARD -->
+        <section class="view" id="view-dashboard">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">Painel</p>
+              <h1>Bem-vindo, Gabriel</h1>
+              <p class="desc">Resumo rápido da sua atividade. Consulte pedidos, presenças e despesas em análise.</p>
+            </div>
+            <div class="head-actions">
+              <div class="theme-toggle" id="theme-toggle" role="group" aria-label="Tema da interface">
+                <button type="button" data-theme-choice="light" title="Claro" aria-label="Tema claro">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8L6 18M18 6l1.8-1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                </button>
+                <button type="button" data-theme-choice="dark" title="Escuro" aria-label="Tema escuro">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 14.5A8.5 8.5 0 1110 3a7 7 0 0010 11.5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                </button>
+                <button type="button" data-theme-choice="system" title="Sistema" aria-label="Tema do sistema" class="active">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 20h8M12 16v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="stat-grid">
+            <div class="stat-tile accent">
+              <div class="stat-label">Dias de férias disponíveis</div>
+              <div class="stat-value">14 dias</div>
+              <div class="stat-sub">5 já aprovados para 2026</div>
+            </div>
+            <div class="stat-tile">
+              <div class="stat-label"><span class="icon-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M9 9l6 6M15 9l-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>Faltas este ano</div>
+              <div class="stat-value">3</div>
+              <div class="stat-sub">1 em análise</div>
+            </div>
+            <div class="stat-tile">
+              <div class="stat-label"><span class="icon-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="6" width="19" height="13" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M2.5 10h19" stroke="currentColor" stroke-width="1.8"/></svg></span>Despesas por aprovar</div>
+              <div class="stat-value">€ 84,50</div>
+              <div class="stat-sub">2 registos em análise</div>
+            </div>
+            <div class="stat-tile">
+              <div class="stat-label"><span class="icon-chip"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>Última presença registada</div>
+              <div class="stat-value">Registada</div>
+              <div class="stat-sub">21 set. 2026, 08:04</div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>Emissão de documentos</h2>
+                <div class="panel-sub">Gere documentos oficiais a partir do portal</div>
+              </div>
+            </div>
+            <div class="panel-body">
+              <a class="doc-action" href="#" onclick="showToast('Documento gerado (simulação).'); return false;">
+                <span class="icon-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M7 7V5a2 2 0 012-2h6a2 2 0 012 2v2" stroke="currentColor" stroke-width="1.7"/></svg></span>
+                <span>
+                  <div class="doc-title">Emissão de equipamentos para reparação</div>
+                  <div class="doc-sub">Gera a declaração de transporte em PDF, pronta a imprimir</div>
+                </span>
+                <span class="go">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <div><h2>Atividade recente</h2><div class="panel-sub">Últimas atualizações aos seus pedidos</div></div>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <tbody>
+                  <tr><td style="width:120px;color:var(--muted);">19 set. 2026</td><td>Pedido de férias <strong>03–14 ago. 2026</strong> foi aprovado</td><td style="width:120px;"><span class="pill ok">Aprovado</span></td></tr>
+                  <tr><td style="width:120px;color:var(--muted);">15 set. 2026</td><td>Despesa de combustível (doc. 4471) submetida para aprovação</td><td style="width:120px;"><span class="pill pending">Em análise</span></td></tr>
+                  <tr><td style="width:120px;color:var(--muted);">02 set. 2026</td><td>Pedido de falta justificada registado</td><td style="width:120px;"><span class="pill ok">Aprovado</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- FERIAS -->
+        <section class="view hidden" id="view-ferias">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">Gestão de pessoal</p>
+              <h1>Férias</h1>
+              <p class="desc">Consulte os dias aprovados por ano e submeta novos pedidos de férias.</p>
+            </div>
+            <div class="head-actions">
+              <button class="btn btn-primary" data-open-modal="modal-ferias">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                Novo pedido
+              </button>
+            </div>
+          </div>
+
+          <div class="year-tabs" id="ferias-year-tabs">
+            <button class="year-tab" data-year="2022">2022 <span class="n">18</span></button>
+            <button class="year-tab" data-year="2023">2023 <span class="n">20</span></button>
+            <button class="year-tab" data-year="2024">2024 <span class="n">22</span></button>
+            <button class="year-tab" data-year="2025">2025 <span class="n">12</span></button>
+            <button class="year-tab active" data-year="2026">2026 <span class="n">5</span></button>
+          </div>
+
+          <div class="panel">
+            <div class="toolbar">
+              <div class="search-box">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <input type="text" placeholder="Pesquisar pedidos…" data-table-search="tbl-ferias" />
+              </div>
+              <div class="spacer"></div>
+              <select class="select-inline" data-table-page-size="tbl-ferias">
+                <option value="5">5 por página</option>
+                <option value="10" selected>10 por página</option>
+                <option value="25">25 por página</option>
+              </select>
+            </div>
+            <div class="table-scroll">
+              <table id="tbl-ferias">
+                <thead>
+                  <tr>
+                    <th data-sort="text">Tipo <span class="arrows">↕</span></th>
+                    <th data-sort="date">Data inicial <span class="arrows">↕</span></th>
+                    <th data-sort="date">Data final <span class="arrows">↕</span></th>
+                    <th data-sort="text">Notas <span class="arrows">↕</span></th>
+                    <th data-sort="text">Estado <span class="arrows">↕</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr data-year="2026"><td>Férias</td><td class="num">2026-08-03</td><td class="num">2026-08-14</td><td>Semana de agosto, viagem em família</td><td><span class="pill ok">Aprovado</span></td></tr>
+                  <tr data-year="2026"><td>Férias</td><td class="num">2026-12-22</td><td class="num">2026-12-29</td><td>Época natalícia</td><td><span class="pill pending">Em análise</span></td></tr>
+                  <tr data-year="2025"><td>Férias</td><td class="num">2025-07-07</td><td class="num">2025-07-18</td><td>—</td><td><span class="pill ok">Aprovado</span></td></tr>
+                  <tr data-year="2025"><td>Férias</td><td class="num">2025-02-17</td><td class="num">2025-02-21</td><td>Assuntos pessoais</td><td><span class="pill bad">Recusado</span></td></tr>
+                  <tr data-year="2024"><td>Férias</td><td class="num">2024-08-05</td><td class="num">2024-08-16</td><td>—</td><td><span class="pill ok">Aprovado</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="pager">
+              <div class="pager-info">A mostrar 5 pedidos</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- FALTAS -->
+        <section class="view hidden" id="view-faltas">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">Gestão de pessoal</p>
+              <h1>Faltas</h1>
+              <p class="desc">Registe ausências e acompanhe o respetivo estado de aprovação.</p>
+            </div>
+            <div class="head-actions">
+              <button class="btn btn-primary" data-open-modal="modal-faltas">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                Nova falta
+              </button>
+            </div>
+          </div>
+
+          <div class="stat-grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr));">
+            <div class="stat-tile"><div class="stat-label">Aprovadas</div><div class="stat-value">2</div></div>
+            <div class="stat-tile"><div class="stat-label">Em análise</div><div class="stat-value">1</div></div>
+            <div class="stat-tile"><div class="stat-label">Recusadas</div><div class="stat-value">0</div></div>
+          </div>
+
+          <div class="panel">
+            <div class="toolbar">
+              <div class="search-box">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <input type="text" placeholder="Pesquisar faltas…" data-table-search="tbl-faltas" />
+              </div>
+            </div>
+            <div class="table-scroll">
+              <table id="tbl-faltas">
+                <thead>
+                  <tr>
+                    <th data-sort="text">Designação <span class="arrows">↕</span></th>
+                    <th data-sort="date">Data <span class="arrows">↕</span></th>
+                    <th data-sort="text">Notas <span class="arrows">↕</span></th>
+                    <th data-sort="text">Estado <span class="arrows">↕</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Falta justificada — consulta médica</td><td class="num">2026-03-14</td><td>Consulta de rotina</td><td><span class="pill ok">Aprovado</span></td></tr>
+                  <tr><td>Falta justificada — assistência a familiar</td><td class="num">2026-06-02</td><td>—</td><td><span class="pill ok">Aprovado</span></td></tr>
+                  <tr><td>Falta injustificada</td><td class="num">2026-09-11</td><td>Aguarda documento comprovativo</td><td><span class="pill pending">Em análise</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="pager">
+              <div class="pager-info">A mostrar 3 de 3 registos</div>
+              <div class="pager-btns">
+                <button class="btn btn-ghost btn-sm" disabled>Anterior</button>
+                <button class="btn btn-ghost btn-sm" disabled>Seguinte</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PRESENCA -->
+        <section class="view hidden" id="view-presenca">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">Gestão de pessoal</p>
+              <h1>Registo de presenças</h1>
+              <p class="desc">Consulte o registo diário de presenças e faltas por mês.</p>
+            </div>
+            <div class="head-actions">
+              <button class="btn btn-primary" id="btn-marcar-presenca">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Marcar presença
+              </button>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-body" style="padding-bottom:0;">
+              <div class="month-tabs" id="month-tabs">
+                <button class="month-tab" data-m="Janeiro">Jan</button>
+                <button class="month-tab" data-m="Fevereiro">Fev</button>
+                <button class="month-tab" data-m="Março">Mar</button>
+                <button class="month-tab" data-m="Abril">Abr</button>
+                <button class="month-tab" data-m="Maio">Mai</button>
+                <button class="month-tab" data-m="Junho">Jun</button>
+                <button class="month-tab" data-m="Julho">Jul</button>
+                <button class="month-tab" data-m="Agosto">Ago</button>
+                <button class="month-tab active today" data-m="Setembro">Set</button>
+                <button class="month-tab" data-m="Outubro">Out</button>
+                <button class="month-tab" data-m="Novembro">Nov</button>
+                <button class="month-tab" data-m="Dezembro">Dez</button>
+              </div>
+            </div>
+            <div class="table-scroll" style="margin-top:14px;">
+              <table>
+                <thead>
+                  <tr><th>Data</th><th>Estado</th><th>Falta</th><th>Tempo de falta</th><th>Notas</th></tr>
+                </thead>
+                <tbody id="presenca-body">
+                  <!-- populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- DESPESAS -->
+        <section class="view hidden" id="view-despesas">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">Despesas</p>
+              <h1>Saldo e registos</h1>
+              <p class="desc">Submeta despesas com comprovativo e acompanhe o saldo disponível.</p>
+            </div>
+            <div class="head-actions">
+              <button class="btn btn-primary" data-open-modal="modal-despesa">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                Nova despesa
+              </button>
+            </div>
+          </div>
+
+          <div class="stat-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
+            <div class="stat-tile accent">
+              <div class="stat-label">Total provisório</div>
+              <div class="stat-value">€ 480,00</div>
+              <div class="stat-sub">Saldo acumulado do ano, incluindo movimentos em análise</div>
+            </div>
+            <div class="stat-tile">
+              <div class="stat-label">Total aceite</div>
+              <div class="stat-value">€ 395,50</div>
+              <div class="stat-sub">Saldo acumulado já confirmado pela contabilidade</div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="toolbar">
+              <div class="search-box">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <input type="text" placeholder="Pesquisar movimentos…" data-table-search="tbl-despesas" />
+              </div>
+            </div>
+            <div class="table-scroll">
+              <table id="tbl-despesas">
+                <thead>
+                  <tr>
+                    <th data-sort="date">Data <span class="arrows">↕</span></th>
+                    <th data-sort="text">Movimento <span class="arrows">↕</span></th>
+                    <th data-sort="text">Documento <span class="arrows">↕</span></th>
+                    <th data-sort="num" class="num">Valor <span class="arrows">↕</span></th>
+                    <th data-sort="text">Estado <span class="arrows">↕</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td class="num">2026-09-15</td><td>Combustível</td><td>FT 4471</td><td class="num">€ 62,30</td><td><span class="pill pending">Em análise</span></td></tr>
+                  <tr><td class="num">2026-09-08</td><td>Portagens</td><td>REC 981</td><td class="num">€ 22,20</td><td><span class="pill pending">Em análise</span></td></tr>
+                  <tr><td class="num">2026-08-29</td><td>Refeição</td><td>FT 3390</td><td class="num">€ 14,50</td><td><span class="pill ok">Aceite</span></td></tr>
+                  <tr><td class="num">2026-08-12</td><td>Material</td><td>FT 3102</td><td class="num">€ 128,90</td><td><span class="pill ok">Aceite</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="pager">
+              <div class="pager-info">A mostrar 4 de 4 registos</div>
+              <div class="pager-btns">
+                <button class="btn btn-ghost btn-sm" disabled>Anterior</button>
+                <button class="btn btn-ghost btn-sm" disabled>Seguinte</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- EXTRATO -->
+        <section class="view hidden" id="view-extrato">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">Despesas</p>
+              <h1>Extrato mensal</h1>
+              <p class="desc">Totais de crédito e débito por mês, para o ano corrente.</p>
+            </div>
+          </div>
+
+          <div class="stat-tile accent" style="max-width:280px;">
+            <div class="stat-label">Saldo acumulado 2026</div>
+            <div class="stat-value" id="extrato-saldo">€ 0,00</div>
+            <div class="stat-sub">Crédito − débito, ano a ano</div>
+          </div>
+
+          <div class="panel">
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr><th>Mês</th><th class="num">Crédito</th><th class="num">Débito</th><th>Balanço</th></tr>
+                </thead>
+                <tbody id="extrato-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- DOCUMENTOS -->
+        <section class="view hidden" id="view-documentos">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">Documentos</p>
+              <h1>Emissão de documentos</h1>
+              <p class="desc">Gere documentos oficiais associados à sua atividade.</p>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-body" style="display:flex; flex-direction:column; gap:12px;">
+              <a class="doc-action" href="#" onclick="showToast('Documento gerado (simulação).'); return false;">
+                <span class="icon-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M7 7V5a2 2 0 012-2h6a2 2 0 012 2v2" stroke="currentColor" stroke-width="1.7"/></svg></span>
+                <span>
+                  <div class="doc-title">Emissão de equipamentos para reparação</div>
+                  <div class="doc-sub">Declaração de transporte de equipamento para reparação, em PDF</div>
+                </span>
+                <span class="go"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- PASSWORD -->
+        <section class="view hidden" id="view-password">
+          <div class="page-head">
+            <div>
+              <p class="eyebrow">Conta</p>
+              <h1>Alterar palavra-passe</h1>
+              <p class="desc">Escolha uma palavra-passe forte e evite reutilizar a de outros serviços.</p>
+            </div>
+          </div>
+          <div class="panel" style="max-width:460px;">
+            <div class="panel-body" style="display:flex; flex-direction:column; gap:16px;">
+              <div class="field">
+                <label for="pw-new">Nova palavra-passe</label>
+                <input id="pw-new" type="password" placeholder="••••••••" />
+                <div class="strength-bar"><span id="strength-fill"></span></div>
+                <span class="strength-label" id="strength-label">Introduza uma palavra-passe</span>
+              </div>
+              <div class="field">
+                <label for="pw-repeat">Repita a palavra-passe</label>
+                <input id="pw-repeat" type="password" placeholder="••••••••" />
+                <span class="helper-error" id="pw-error">As palavras-passe não coincidem.</span>
+              </div>
+              <div style="display:flex; gap:10px;">
+                <button class="btn btn-primary" id="pw-submit">Confirmar</button>
+                <button class="btn btn-ghost" id="pw-cancel">Cancelar</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODALS ===================== -->
+<dialog id="modal-ferias">
+  <form method="dialog">
+    <div class="modal-head"><h3>Novo pedido de férias</h3><button type="button" class="icon-btn" data-close-modal>✕</button></div>
+    <div class="modal-body">
+      <div class="field">
+        <label for="f-ano">Período</label>
+        <select id="f-ano">
+          <option>Férias 2026</option>
+          <option>Férias 2025</option>
+          <option>Férias 2024</option>
+        </select>
+      </div>
+      <div class="field-grid">
+        <div class="field"><label for="f-inicio">Data inicial</label><input id="f-inicio" type="date" value="2026-09-21" /></div>
+        <div class="field"><label for="f-fim">Data final</label><input id="f-fim" type="date" value="2026-09-21" /></div>
+      </div>
+      <div class="field">
+        <label for="f-duracao">Duração</label>
+        <select id="f-duracao">
+          <option>Dia inteiro</option>
+          <option>Meio-dia — manhã</option>
+          <option>Meio-dia — tarde</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Estado</label>
+        <div class="field-static">Em análise — aguarda aprovação do responsável</div>
+      </div>
+      <div class="field">
+        <label for="f-notas">Notas <span style="color:var(--muted-2); font-weight:400;">(opcional)</span></label>
+        <textarea id="f-notas" placeholder="Contexto adicional para quem vai aprovar o pedido…"></textarea>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button type="button" class="btn btn-ghost" data-close-modal>Cancelar</button>
+      <button type="button" class="btn btn-primary" onclick="submitModal('modal-ferias','Pedido de férias submetido.')">Submeter pedido</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="modal-faltas">
+  <form method="dialog">
+    <div class="modal-head"><h3>Nova falta</h3><button type="button" class="icon-btn" data-close-modal>✕</button></div>
+    <div class="modal-body">
+      <div class="field">
+        <label for="ft-designacao">Designação</label>
+        <select id="ft-designacao">
+          <option>Falta justificada — consulta médica</option>
+          <option>Falta justificada — assistência a familiar</option>
+          <option>Falta injustificada</option>
+          <option>Outra</option>
+        </select>
+      </div>
+      <div class="field"><label for="ft-data">Data</label><input id="ft-data" type="date" value="2026-09-21" /></div>
+      <div class="field">
+        <label for="ft-notas">Notas</label>
+        <textarea id="ft-notas" placeholder="Descreva o motivo da falta…"></textarea>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button type="button" class="btn btn-ghost" data-close-modal>Cancelar</button>
+      <button type="button" class="btn btn-primary" onclick="submitModal('modal-faltas','Falta submetida.')">Submeter falta</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="modal-despesa">
+  <form method="dialog">
+    <div class="modal-head"><h3>Nova despesa</h3><button type="button" class="icon-btn" data-close-modal>✕</button></div>
+    <div class="modal-body">
+      <div class="field">
+        <label>Comprovativo</label>
+        <input type="file" id="receipt-input" accept="image/*,.pdf" hidden />
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Anexar comprovativo para leitura automática" aria-live="polite">
+          <div id="dz-idle">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 16V4M7 9l5-5 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <div>Arraste uma imagem ou <strong style="color:var(--accent);">selecione um ficheiro</strong></div>
+            <div class="dz-hint">JPG, PNG ou PDF — os dados são lidos automaticamente</div>
+          </div>
+          <div id="dz-scanning" class="hidden">
+            <div class="dz-spinner"></div>
+            <div>A ler o comprovativo…</div>
+            <div class="dz-hint">A identificar data, tipo, documento e valor</div>
+          </div>
+          <div id="dz-done" class="hidden">
+            <div class="dz-file-chip">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="dz-file-name" id="dz-filename">comprovativo.jpg</span>
+              <button type="button" class="dz-replace" id="dz-replace">Substituir</button>
+            </div>
+          </div>
+          <div id="dz-error" class="hidden">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style="color:var(--danger);"><path d="M12 9v4M12 17h.01M10.3 3.9L2.8 17a1.5 1.5 0 001.3 2.2h15.8a1.5 1.5 0 001.3-2.2L13.7 3.9a1.5 1.5 0 00-2.6 0z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div style="color:var(--danger);">Formato não suportado</div>
+            <div class="dz-hint">Utilize JPG, PNG ou PDF. Toque para tentar novamente.</div>
+          </div>
+        </div>
+        <div class="autofill-banner hidden" id="autofill-banner">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Preenchemos data, tipo, documento e valor a partir do comprovativo. Reveja os campos antes de submeter.</span>
+        </div>
+      </div>
+      <div class="form-section-label">Dados da despesa</div>
+      <div class="field-grid">
+        <div class="field"><label for="d-data">Data <span class="auto-tag hidden" id="tag-d-data">Detetado</span></label><input id="d-data" type="date" value="2026-09-21" data-tag="tag-d-data" /></div>
+        <div class="field">
+          <label for="d-tipo">Tipo de movimento <span class="auto-tag hidden" id="tag-d-tipo">Detetado</span></label>
+          <select id="d-tipo" data-tag="tag-d-tipo">
+            <option>Combustível</option>
+            <option>Portagens</option>
+            <option>Refeição</option>
+            <option>Material</option>
+            <option>Alojamento</option>
+            <option>Caução Carro de Substituição</option>
+            <option>Acerto C/C Final</option>
+            <option>Adiantamento</option>
+            <option>Almoço</option>
+            <option>Aluguel de Viatura</option>
+            <option>Bilhete de autocarro</option>
+            <option>Substituição de cartão Edenred</option>
+            <option>CTT - Despacho</option>
+            <option>CTT - Selos</option>
+            <option>Ferramentas</option>
+            <option>Hotel</option>
+            <option>Inspeção viatura</option>
+            <option>Jantar</option>
+            <option>Mat. Escritório</option>
+            <option>Mat. Limpeza de Auto</option>
+            <option>Mat. Limpeza de Escritório</option>
+            <option>Metro</option>
+            <option>Parque / Parquímetro</option>
+            <option>Passe</option>
+            <option>Pneus</option>
+            <option>Portagens Carro de Substituição</option>
+            <option>Reparação Auto</option>
+            <option>Saldo Inicial</option>
+            <option>Taxi / Uber</option>
+            <option>Transferência</option>
+          </select>
+        </div>
+      </div>
+      <div class="field-grid">
+        <div class="field"><label for="d-doc">Nº documento <span class="auto-tag hidden" id="tag-d-doc">Detetado</span></label><input id="d-doc" type="text" placeholder="ex. FT 4471" data-tag="tag-d-doc" /></div>
+        <div class="field"><label for="d-valor">Valor <span class="auto-tag hidden" id="tag-d-valor">Detetado</span></label><input id="d-valor" type="text" placeholder="€ 0,00" data-tag="tag-d-valor" /></div>
+      </div>
+      <div class="field-grid hidden" id="fuel-type-row">
+        <div class="field">
+          <label for="d-fuel-tipo">Tipo de combustível</label>
+          <select id="d-fuel-tipo">
+            <option>Gasolina simples 95</option>
+            <option>Gasolina 95 aditivada / premium</option>
+            <option>Gasolina 98</option>
+            <option>Gasóleo simples</option>
+            <option>Gasóleo aditivado / premium</option>
+            <option>GPL Auto</option>
+            <option>Elétrico (carregamento)</option>
+            <option>AdBlue</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="d-km">Quilometragem atual (km)</label>
+          <input id="d-km" type="number" min="0" step="1" inputmode="numeric" placeholder="ex. 84210" />
+        </div>
+      </div>
+      <div class="field hidden" id="vehicle-plate-row">
+        <label for="d-matricula">Matrícula da viatura <span style="color:var(--muted-2); font-weight:400;">— identifica o veículo utilizado</span></label>
+        <input id="d-matricula" type="text" placeholder="AA-00-AA" maxlength="8" style="text-transform:uppercase;" />
+      </div>
+      <div class="field">
+        <label for="d-notas">Notas</label>
+        <textarea id="d-notas" placeholder="Contexto da despesa…"></textarea>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button type="button" class="btn btn-ghost" data-close-modal>Cancelar</button>
+      <button type="button" class="btn btn-primary" onclick="submitDespesa(this)">Submeter despesa</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <svg id="toast-icon-success" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <svg id="toast-icon-info" class="hidden" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 16v-4M12 8h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <span id="toast-msg">Ação concluída.</span>
+</div>
+
+<script>
+(function(){
+  // ---------- Login ----------
+  var loginView = document.getElementById('view-login');
+  var shell = document.getElementById('shell');
+  var loginForm = document.getElementById('login-form');
+  loginForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    loginView.classList.add('hidden');
+    shell.classList.remove('hidden');
+    setRoute('dashboard');
+  });
+  document.getElementById('toggle-pass').addEventListener('click', function(){
+    var i = document.getElementById('login-pass');
+    var showing = i.type === 'password';
+    i.type = showing ? 'text' : 'password';
+    this.setAttribute('aria-label', showing ? 'Ocultar palavra-passe' : 'Mostrar palavra-passe');
+  });
+  document.getElementById('logout-link').addEventListener('click', function(){
+    shell.classList.add('hidden');
+    loginView.classList.remove('hidden');
+  });
+
+  // ---------- Routing ----------
+  var routes = ['dashboard','ferias','faltas','presenca','despesas','extrato','documentos','password'];
+  function setRoute(r){
+    routes.forEach(function(name){
+      var el = document.getElementById('view-' + name);
+      if(el) el.classList.toggle('hidden', name !== r);
+    });
+    document.querySelectorAll('.nav-link[data-route]').forEach(function(l){
+      l.classList.toggle('active', l.getAttribute('data-route') === r);
+    });
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('scrim').classList.add('hidden');
+    document.querySelector('.content').scrollTo({top:0});
+    window.scrollTo({top:0});
+  }
+  document.querySelectorAll('.nav-link[data-route]').forEach(function(l){
+    l.addEventListener('click', function(){ setRoute(l.getAttribute('data-route')); });
+  });
+
+  // ---------- Mobile menu ----------
+  var sidebar = document.getElementById('sidebar');
+  var scrim = document.getElementById('scrim');
+  document.getElementById('menu-toggle').addEventListener('click', function(){
+    sidebar.classList.add('open');
+    scrim.classList.remove('hidden');
+  });
+  scrim.addEventListener('click', function(){
+    sidebar.classList.remove('open');
+    scrim.classList.add('hidden');
+  });
+
+  // ---------- Theme ----------
+  var themeButtons = document.querySelectorAll('[data-theme-choice]');
+  function applyTheme(choice){
+    if(choice === 'system'){ document.documentElement.removeAttribute('data-theme'); }
+    else{ document.documentElement.setAttribute('data-theme', choice); }
+    themeButtons.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-theme-choice') === choice); });
+    try{ localStorage.setItem('sb2-theme', choice); }catch(e){}
+  }
+  themeButtons.forEach(function(b){
+    b.addEventListener('click', function(){ applyTheme(b.getAttribute('data-theme-choice')); });
+  });
+  try{
+    var saved = localStorage.getItem('sb2-theme');
+    if(saved) applyTheme(saved);
+  }catch(e){}
+
+  // ---------- Modals ----------
+  document.querySelectorAll('[data-open-modal]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var modalId = btn.getAttribute('data-open-modal');
+      var dlg = document.getElementById(modalId);
+      if(modalId === 'modal-despesa' && typeof resetDespesaForm === 'function') resetDespesaForm();
+      if(dlg && dlg.showModal) dlg.showModal();
+    });
+  });
+  document.querySelectorAll('[data-close-modal]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var dlg = btn.closest('dialog');
+      if(dlg) dlg.close();
+    });
+  });
+  window.submitModal = function(id, msg){
+    var dlg = document.getElementById(id);
+    if(dlg) dlg.close();
+    showToast(msg);
+  };
+
+  // ---------- Toast ----------
+  var toast = document.getElementById('toast');
+  var toastMsg = document.getElementById('toast-msg');
+  var toastIconSuccess = document.getElementById('toast-icon-success');
+  var toastIconInfo = document.getElementById('toast-icon-info');
+  var toastTimer;
+  window.showToast = function(msg, type){
+    type = (type === 'info') ? 'info' : 'success';
+    toastMsg.textContent = msg;
+    toastIconSuccess.classList.toggle('hidden', type !== 'success');
+    toastIconInfo.classList.toggle('hidden', type !== 'info');
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 3200);
+  };
+
+  // ---------- Ferias year filter ----------
+  var yearTabs = document.querySelectorAll('#ferias-year-tabs .year-tab');
+  yearTabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      yearTabs.forEach(function(t){ t.classList.remove('active'); });
+      tab.classList.add('active');
+      var year = tab.getAttribute('data-year');
+      document.querySelectorAll('#tbl-ferias tbody tr').forEach(function(row){
+        row.style.display = (row.getAttribute('data-year') === year) ? '' : 'none';
+      });
+    });
+  });
+
+  // ---------- Table search (com estado "sem resultados") ----------
+  document.querySelectorAll('[data-table-search]').forEach(function(input){
+    var table = document.getElementById(input.getAttribute('data-table-search'));
+    var tbody = table.querySelector('tbody');
+    var colCount = table.querySelectorAll('thead th').length || 1;
+
+    var emptyRow = document.createElement('tr');
+    emptyRow.className = 'empty-row search-empty-row hidden';
+    var td = document.createElement('td');
+    td.colSpan = colCount;
+    emptyRow.appendChild(td);
+    tbody.appendChild(emptyRow);
+
+    input.addEventListener('input', function(){
+      var q = input.value.trim().toLowerCase();
+      var visibleCount = 0;
+      tbody.querySelectorAll('tr:not(.search-empty-row)').forEach(function(row){
+        var match = row.textContent.toLowerCase().indexOf(q) > -1;
+        row.style.display = match ? '' : 'none';
+        if(match) visibleCount++;
+      });
+      if(q && visibleCount === 0){
+        td.textContent = '';
+        td.appendChild(document.createTextNode('Nenhum resultado para "'));
+        var strong = document.createElement('strong');
+        strong.textContent = input.value.trim();
+        td.appendChild(strong);
+        td.appendChild(document.createTextNode('". '));
+        var clearBtn = document.createElement('button');
+        clearBtn.type = 'button';
+        clearBtn.className = 'link-quiet';
+        clearBtn.style.cssText = 'background:none;border:none;cursor:pointer;font:inherit;padding:0;';
+        clearBtn.textContent = 'Limpar pesquisa';
+        clearBtn.addEventListener('click', function(){
+          input.value = '';
+          input.dispatchEvent(new Event('input'));
+          input.focus();
+        });
+        td.appendChild(clearBtn);
+        emptyRow.classList.remove('hidden');
+      } else {
+        emptyRow.classList.add('hidden');
+      }
+    });
+  });
+
+  // ---------- Table sort ----------
+  document.querySelectorAll('table thead th[data-sort]').forEach(function(th){
+    th.addEventListener('click', function(){
+      var table = th.closest('table');
+      var tbody = table.querySelector('tbody');
+      var idx = Array.prototype.indexOf.call(th.parentNode.children, th);
+      var type = th.getAttribute('data-sort');
+      var asc = th.getAttribute('data-asc') !== 'true';
+      table.querySelectorAll('th').forEach(function(h){ h.removeAttribute('data-asc'); });
+      th.setAttribute('data-asc', asc);
+      var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+      rows.sort(function(a,b){
+        var av = a.children[idx] ? a.children[idx].textContent.trim() : '';
+        var bv = b.children[idx] ? b.children[idx].textContent.trim() : '';
+        if(type === 'num'){ av = parseFloat(av.replace(/[^\d.,-]/g,'').replace(',','.')) || 0; bv = parseFloat(bv.replace(/[^\d.,-]/g,'').replace(',','.')) || 0; }
+        if(av < bv) return asc ? -1 : 1;
+        if(av > bv) return asc ? 1 : -1;
+        return 0;
+      });
+      rows.forEach(function(r){ tbody.appendChild(r); });
+    });
+  });
+
+  // ---------- Presenca data ----------
+  var presencaData = {
+    Setembro: [
+      ['2026-09-01','Presença','','',''],
+      ['2026-09-02','Presença','','',''],
+      ['2026-09-03','Presença','','',''],
+      ['2026-09-04','Presença','','',''],
+      ['2026-09-07','Presença','','',''],
+      ['2026-09-08','Presença','','',''],
+      ['2026-09-09','Falta','Falta justificada','1 dia','Consulta médica'],
+      ['2026-09-10','Presença','','',''],
+      ['2026-09-11','Presença','','',''],
+      ['2026-09-14','Presença','','',''],
+      ['2026-09-15','Presença','','',''],
+      ['2026-09-16','Presença','','',''],
+      ['2026-09-17','Presença','','',''],
+      ['2026-09-18','Presença','','',''],
+      ['2026-09-21','Presença','','','Registo de hoje']
+    ]
+  };
+  function pillFor(estado){
+    if(estado === 'Presença') return '<span class="pill ok">Presença</span>';
+    if(estado === 'Falta') return '<span class="pill bad">Falta</span>';
+    return '<span class="pill neutral">' + estado + '</span>';
+  }
+  function renderPresenca(mes){
+    var rows = presencaData[mes] || [];
+    var tbody = document.getElementById('presenca-body');
+    if(rows.length === 0){
+      tbody.innerHTML = '<tr class="empty-row"><td colspan="5">Sem registos para este mês.</td></tr>';
+      return;
+    }
+    tbody.innerHTML = rows.map(function(r){
+      return '<tr><td class="num">'+r[0]+'</td><td>'+pillFor(r[1])+'</td><td>'+(r[2]||'—')+'</td><td>'+(r[3]||'—')+'</td><td>'+(r[4]||'—')+'</td></tr>';
+    }).join('');
+  }
+  var monthTabs = document.querySelectorAll('#month-tabs .month-tab');
+  monthTabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      monthTabs.forEach(function(t){ t.classList.remove('active'); });
+      tab.classList.add('active');
+      renderPresenca(tab.getAttribute('data-m'));
+    });
+  });
+  renderPresenca('Setembro');
+
+  // O anel "mês atual" segue sempre a data real do dispositivo, para não
+  // ficar preso em Setembro se o protótipo for usado noutro mês.
+  var monthNames = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  var mesAtualReal = monthNames[new Date().getMonth()];
+  monthTabs.forEach(function(t){
+    t.classList.toggle('today', t.getAttribute('data-m') === mesAtualReal);
+  });
+
+  // ---------- Marcar presença ----------
+  document.getElementById('btn-marcar-presenca').addEventListener('click', function(){
+    var todayIso = todayLocalISO();
+    var mesNome = monthNames[new Date().getMonth()];
+    if(!presencaData[mesNome]) presencaData[mesNome] = [];
+
+    var jaTemHoje = presencaData[mesNome].some(function(r){ return r[0] === todayIso && r[1] === 'Presença'; });
+    if(jaTemHoje){
+      showToast('Já tem presença registada hoje.', 'info');
+    } else {
+      presencaData[mesNome].push([todayIso, 'Presença', '', '', 'Registo de hoje']);
+      showToast('Presença registada com sucesso.');
+    }
+
+    monthTabs.forEach(function(t){ t.classList.toggle('active', t.getAttribute('data-m') === mesNome); });
+    renderPresenca(mesNome);
+  });
+
+  // ---------- Extrato data ----------
+  var extrato = [
+    ['Janeiro', 572.89, 650.00],
+    ['Fevereiro', 458.11, 460.00],
+    ['Março', 155.54, 200.00],
+    ['Abril', 301.58, 200.00],
+    ['Maio', 308.70, 400.00],
+    ['Junho', 148.27, 100.00],
+    ['Julho', 244.64, 200.00],
+    ['Agosto', 81.00, 100.00],
+    ['Setembro', 112.26, 200.00]
+  ];
+  function eur(v){ return '€ ' + v.toFixed(2).replace('.', ','); }
+  document.getElementById('extrato-body').innerHTML = extrato.map(function(r){
+    var saldo = r[1] - r[2];
+    var cls = saldo >= 0 ? 'ok' : 'bad';
+    return '<tr><td>'+r[0]+'</td><td class="num">'+eur(r[1])+'</td><td class="num">'+eur(r[2])+'</td><td><span class="pill '+cls+'">'+(saldo>=0?'+':'')+eur(saldo)+'</span></td></tr>';
+  }).join('');
+  var extratoSaldoTotal = extrato.reduce(function(acc, r){ return acc + (r[1] - r[2]); }, 0);
+  document.getElementById('extrato-saldo').textContent = (extratoSaldoTotal >= 0 ? '' : '−') + eur(Math.abs(extratoSaldoTotal));
+
+  // ---------- Password strength ----------
+  var pwNew = document.getElementById('pw-new');
+  var pwRepeat = document.getElementById('pw-repeat');
+  var strengthFill = document.getElementById('strength-fill');
+  var strengthLabel = document.getElementById('strength-label');
+  var pwError = document.getElementById('pw-error');
+  function scorePw(v){
+    var score = 0;
+    if(v.length >= 8) score++;
+    if(/[A-Z]/.test(v)) score++;
+    if(/[0-9]/.test(v)) score++;
+    if(/[^A-Za-z0-9]/.test(v)) score++;
+    return score;
+  }
+  pwNew.addEventListener('input', function(){
+    var v = pwNew.value;
+    var s = scorePw(v);
+    var pct = v.length === 0 ? 0 : (s/4)*100;
+    var colors = ['var(--danger)','var(--danger)','var(--warning)','var(--success)','var(--success)'];
+    var labels = ['Introduza uma palavra-passe','Fraca','Razoável','Boa','Forte'];
+    strengthFill.style.width = pct + '%';
+    strengthFill.style.background = colors[s];
+    strengthLabel.textContent = labels[v.length === 0 ? 0 : s];
+  });
+  document.getElementById('pw-submit').addEventListener('click', function(){
+    if(pwNew.value.length > 0 && pwNew.value === pwRepeat.value){
+      pwError.classList.remove('show');
+      showToast('Palavra-passe alterada com sucesso.');
+      pwNew.value = ''; pwRepeat.value = '';
+      strengthFill.style.width = '0%';
+      strengthLabel.textContent = 'Introduza uma palavra-passe';
+    } else {
+      pwError.classList.add('show');
+    }
+  });
+  document.getElementById('pw-cancel').addEventListener('click', function(){
+    pwNew.value=''; pwRepeat.value=''; pwError.classList.remove('show');
+    strengthFill.style.width = '0%';
+    strengthLabel.textContent = 'Introduza uma palavra-passe';
+  });
+
+  // ---------- Comprovativo: leitura automática ----------
+  var dz = document.getElementById('dropzone');
+  var receiptInput = document.getElementById('receipt-input');
+  var dzIdle = document.getElementById('dz-idle');
+  var dzScanning = document.getElementById('dz-scanning');
+  var dzDone = document.getElementById('dz-done');
+  var dzError = document.getElementById('dz-error');
+  var autofillBanner = document.getElementById('autofill-banner');
+  var isScanningReceipt = false;
+
+  // O atributo accept do input só filtra o seletor de ficheiros — não é respeitado
+  // no arrastar-e-soltar, por isso validamos aqui a mesma condição real.
+  var ACCEPTED_RECEIPT_TYPES = ['image/jpeg', 'image/png', 'application/pdf'];
+  function isAcceptedReceiptFile(file){
+    if(file.type) return ACCEPTED_RECEIPT_TYPES.indexOf(file.type) > -1;
+    return /\.(jpe?g|png|pdf)$/i.test(file.name || '');
+  }
+
+  // Cenários de reconhecimento: na integração real isto seria substituído por
+  // um serviço de OCR/IA que lê o comprovativo. Aqui simulamos o resultado
+  // para validar o fluxo — se o nome do ficheiro der pistas (ex. "combustivel.jpg"),
+  // usamo-las; caso contrário escolhemos um cenário plausível.
+  var receiptScenarios = [
+    {keys:['combust','gasol','fuel','diesel','posto'], tipo:'Combustível', min:35, max:90, prefix:'FT'},
+    {keys:['portage','via-verde','viaverde','toll'], tipo:'Portagens', min:6, max:28, prefix:'REC'},
+    {keys:['hotel','aloj','hospedagem'], tipo:'Alojamento', min:55, max:165, prefix:'FT'},
+    {keys:['refeic','almoco','jantar','rest','lanche'], tipo:'Refeição', min:7, max:24, prefix:'FT'},
+    {keys:['material','peca','ferramenta','loja'], tipo:'Material', min:25, max:240, prefix:'FT'}
+  ];
+
+  function pad2(n){ return n < 10 ? '0' + n : '' + n; }
+
+  // Data local de hoje no formato YYYY-MM-DD, sem passar por toISOString()
+  // (que usa UTC e pode devolver o dia errado consoante o fuso horário).
+  function todayLocalISO(){
+    var d = new Date();
+    return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
+  }
+
+  function extractReceiptData(file){
+    var name = (file && file.name ? file.name : '').toLowerCase();
+    var match = null;
+    for(var i = 0; i < receiptScenarios.length && !match; i++){
+      for(var j = 0; j < receiptScenarios[i].keys.length; j++){
+        if(name.indexOf(receiptScenarios[i].keys[j]) > -1){ match = receiptScenarios[i]; break; }
+      }
+    }
+    if(!match) match = receiptScenarios[Math.floor(Math.random() * receiptScenarios.length)];
+
+    var valor = match.min + Math.random() * (match.max - match.min);
+    var doc = match.prefix + ' ' + (1000 + Math.floor(Math.random() * 8999));
+
+    var date = new Date();
+    if(file && file.lastModified){
+      var fileDate = new Date(file.lastModified);
+      var twoYearsAgo = new Date(); twoYearsAgo.setFullYear(date.getFullYear() - 2);
+      if(fileDate <= date && fileDate >= twoYearsAgo) date = fileDate;
+    }
+    var iso = date.getFullYear() + '-' + pad2(date.getMonth() + 1) + '-' + pad2(date.getDate());
+
+    return { data: iso, tipo: match.tipo, documento: doc, valor: '€ ' + valor.toFixed(2).replace('.', ',') };
+  }
+
+  function markDetected(inputEl){
+    inputEl.classList.add('just-filled');
+    var tagId = inputEl.getAttribute('data-tag');
+    if(tagId){ var tag = document.getElementById(tagId); if(tag) tag.classList.remove('hidden'); }
+  }
+
+  function applyReceiptData(data){
+    var fData = document.getElementById('d-data');
+    var fTipo = document.getElementById('d-tipo');
+    var fDoc = document.getElementById('d-doc');
+    var fValor = document.getElementById('d-valor');
+    fData.value = data.data; markDetected(fData);
+    fTipo.value = data.tipo; markDetected(fTipo);
+    fDoc.value = data.documento; markDetected(fDoc);
+    fValor.value = data.valor; markDetected(fValor);
+    if(typeof updateFuelFieldsVisibility === 'function') updateFuelFieldsVisibility();
+    autofillBanner.classList.remove('hidden');
+  }
+
+  function clearDetected(inputEl){
+    inputEl.classList.remove('just-filled');
+    var tagId = inputEl.getAttribute('data-tag');
+    if(tagId){ var tag = document.getElementById(tagId); if(tag) tag.classList.add('hidden'); }
+  }
+
+  ['d-data','d-tipo','d-doc','d-valor'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.addEventListener('input', function(){ clearDetected(el); });
+    if(el) el.addEventListener('change', function(){ /* seleção manual mantém-se, só limpa no próximo ficheiro */ });
+  });
+
+  // ---------- Campos associados ao veículo (combustível / portagens) ----------
+  var tipoMovimentoSelect = document.getElementById('d-tipo');
+  var fuelTypeRow = document.getElementById('fuel-type-row');
+  var vehiclePlateRow = document.getElementById('vehicle-plate-row');
+  var matriculaInput = document.getElementById('d-matricula');
+  var kmInput = document.getElementById('d-km');
+
+  function updateFuelFieldsVisibility(){
+    var tipo = tipoMovimentoSelect.value;
+    var isFuel = tipo === 'Combustível';
+    var isToll = tipo === 'Portagens';
+    var showPlate = isFuel || isToll;
+
+    fuelTypeRow.classList.toggle('hidden', !isFuel);
+    vehiclePlateRow.classList.toggle('hidden', !showPlate);
+
+    if(!isFuel){
+      document.getElementById('d-fuel-tipo').selectedIndex = 0;
+      kmInput.value = '';
+    }
+    if(!showPlate){
+      matriculaInput.value = '';
+    }
+  }
+  tipoMovimentoSelect.addEventListener('change', updateFuelFieldsVisibility);
+
+  if(matriculaInput){
+    matriculaInput.addEventListener('input', function(){
+      var v = matriculaInput.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6);
+      matriculaInput.value = (v.match(/.{1,2}/g) || []).join('-');
+    });
+  }
+
+  function resetDespesaForm(){
+    dzIdle.classList.remove('hidden');
+    dzScanning.classList.add('hidden');
+    dzDone.classList.add('hidden');
+    dzError.classList.add('hidden');
+    autofillBanner.classList.add('hidden');
+    dz.classList.remove('drag');
+    dz.classList.remove('scanning');
+    isScanningReceipt = false;
+    receiptInput.value = '';
+    ['d-data','d-tipo','d-doc','d-valor'].forEach(function(id){
+      var el = document.getElementById(id);
+      if(el) clearDetected(el);
+    });
+    document.getElementById('d-data').value = todayLocalISO();
+    document.getElementById('d-doc').value = '';
+    document.getElementById('d-valor').value = '';
+    document.getElementById('d-notas').value = '';
+    tipoMovimentoSelect.selectedIndex = 0;
+    updateFuelFieldsVisibility();
+  }
+
+  // Estado de submissão só do formulário de despesa — não toca em submitModal(),
+  // que é partilhada com os modais de Férias e Faltas.
+  window.submitDespesa = function(btn){
+    btn.classList.add('is-loading');
+    btn.disabled = true;
+    setTimeout(function(){
+      btn.classList.remove('is-loading');
+      btn.disabled = false;
+      submitModal('modal-despesa', 'Despesa submetida para análise.');
+    }, 550);
+  };
+
+  function handleReceiptFile(file){
+    if(!file || isScanningReceipt) return;
+
+    if(!isAcceptedReceiptFile(file)){
+      dzIdle.classList.add('hidden');
+      dzDone.classList.add('hidden');
+      dzScanning.classList.add('hidden');
+      dzError.classList.remove('hidden');
+      autofillBanner.classList.add('hidden');
+      receiptInput.value = '';
+      return;
+    }
+
+    dzError.classList.add('hidden');
+    dzIdle.classList.add('hidden');
+    dzDone.classList.add('hidden');
+    dzScanning.classList.remove('hidden');
+    autofillBanner.classList.add('hidden');
+    isScanningReceipt = true;
+    dz.classList.add('scanning');
+    setTimeout(function(){
+      var data = extractReceiptData(file);
+      dzScanning.classList.add('hidden');
+      dzDone.classList.remove('hidden');
+      document.getElementById('dz-filename').textContent = file.name || 'comprovativo.jpg';
+      applyReceiptData(data);
+      showToast('Comprovativo lido — dados preenchidos automaticamente.', 'info');
+      isScanningReceipt = false;
+      dz.classList.remove('scanning');
+    }, 1100 + Math.random() * 500);
+  }
+
+  if(dz){
+    dz.addEventListener('click', function(){ receiptInput.click(); });
+    dz.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); receiptInput.click(); }
+    });
+    dz.addEventListener('dragover', function(e){ e.preventDefault(); dz.classList.add('drag'); });
+    dz.addEventListener('dragleave', function(){ dz.classList.remove('drag'); });
+    dz.addEventListener('drop', function(e){
+      e.preventDefault();
+      dz.classList.remove('drag');
+      if(e.dataTransfer.files && e.dataTransfer.files[0]) handleReceiptFile(e.dataTransfer.files[0]);
+    });
+    receiptInput.addEventListener('change', function(){
+      if(receiptInput.files && receiptInput.files[0]) handleReceiptFile(receiptInput.files[0]);
+    });
+    document.getElementById('dz-replace').addEventListener('click', function(e){
+      e.stopPropagation();
+      receiptInput.click();
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

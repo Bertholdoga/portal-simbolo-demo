@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://simbolo2.local/ocr-poc/ground-truth.schema.json",
+  "title": "Ground truth de comprovativo — PoC de OCR do Símbolo²",
+  "description": "Representa o que um humano confirmou estar escrito num único documento do dataset de teste. Um ficheiro por documento (poc-000X.json). Ver docs/ocr-poc/labeling-guide.md para as regras de preenchimento de cada campo.",
+  "type": "object",
+
+  "$defs": {
+    "fieldStatus": {
+      "type": "string",
+      "enum": ["present", "absent", "unreadable"],
+      "description": "present = o dado existe no documento e foi lido com confiança; absent = o documento não contém este dado; unreadable = o dado provavelmente existe mas está ilegível nesta cópia."
+    },
+
+    "labeledString": {
+      "type": "object",
+      "properties": {
+        "status": { "$ref": "#/$defs/fieldStatus" },
+        "value": { "type": ["string", "null"] }
+      },
+      "required": ["status", "value"],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": { "properties": { "status": { "const": "present" } } },
+          "then": { "properties": { "value": { "type": "string", "minLength": 1 } } }
+        },
+        {
+          "if": { "properties": { "status": { "enum": ["absent", "unreadable"] } } },
+          "then": { "properties": { "value": { "type": "null" } } }
+        }
+      ]
+    },
+
+    "labeledNumber": {
+      "type": "object",
+      "properties": {
+        "status": { "$ref": "#/$defs/fieldStatus" },
+        "value": { "type": ["number", "null"] }
+      },
+      "required": ["status", "value"],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": { "properties": { "status": { "const": "present" } } },
+          "then": { "properties": { "value": { "type": "number" } } }
+        },
+        {
+          "if": { "properties": { "status": { "enum": ["absent", "unreadable"] } } },
+          "then": { "properties": { "value": { "type": "null" } } }
+        }
+      ]
+    }
+  },
+
+  "properties": {
+    "document_id": {
+      "type": "string",
+      "pattern": "^poc-[0-9]{4}$",
+      "description": "Identificador sintético, ex. poc-0001. Nunca deriva de nome de colaborador, matrícula, fornecedor ou nº de documento."
+    },
+    "category": {
+      "type": "string",
+      "description": "Uma das categorias de movement_type priorizadas para o PoC (ver README.md).",
+      "enum": [
+        "Combustível", "Portagens", "Hotel / Alojamento", "Almoço", "Jantar",
+        "Parque / Parquímetro", "Reparação Auto", "Pneus", "Inspeção viatura",
+        "Taxi / Uber", "Mat. Escritório", "Ferramentas", "CTT - Despacho", "CTT - Selos"
+      ]
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": ["facil", "medio", "dificil"],
+      "description": "Classificação agregada de dificuldade — critérios objetivos em README.md."
+    },
+    "difficulty_tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Condições específicas observadas, ex. ['fotografia_telemovel', 'pouca_luz', 'papel_termico']. Pode ser vazio para documentos 'facil'."
+    },
+    "source_format": {
+      "type": "string",
+      "enum": ["jpg", "png", "pdf"]
+    },
+    "page_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "language": {
+      "type": "string",
+      "enum": ["pt", "en", "es"],
+      "description": "Idioma predominante do texto do documento."
+    },
+    "capture_method": {
+      "type": "string",
+      "enum": ["fotografia_telemovel", "digitalizacao", "pdf_eletronico", "print_ecran"],
+      "description": "Como o documento chegou a este formato — relevante para explicar diferenças de qualidade entre fornecedores."
+    },
+
+    "date": { "$ref": "#/$defs/labeledString", "description": "Formato ISO 8601 (YYYY-MM-DD) quando present." },
+    "document_number": { "$ref": "#/$defs/labeledString" },
+    "total": { "$ref": "#/$defs/labeledNumber", "description": "Valor final a pagar, ponto decimal, sem símbolo de moeda." },
+    "currency": { "$ref": "#/$defs/labeledString", "description": "Código ISO 4217 (ex. EUR) quando present." },
+    "supplier": { "$ref": "#/$defs/labeledString" },
+    "supplier_tax_id": { "$ref": "#/$defs/labeledString", "description": "Apenas dígitos, sem validação de checksum aplicada no ground truth." },
+    "vehicle_plate": { "$ref": "#/$defs/labeledString", "description": "Só present quando a matrícula estiver de facto impressa no documento — nunca inferida." },
+    "fuel_type": { "$ref": "#/$defs/labeledString", "description": "Só present quando o tipo estiver explicitamente escrito no documento (ex. 'Gasóleo simples')." },
+
+    "expected_movement_type": {
+      "type": "string",
+      "description": "Rótulo de classificação humana para avaliação futura da camada de classificação — não faz parte da avaliação de OCR. Deve corresponder a um movement_type já existente no sistema."
+    },
+    "expected_fuel_type": {
+      "type": ["string", "null"],
+      "description": "Idem, para fuel_type. null quando a categoria não é Combustível."
+    },
+
+    "reviewed_by": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Identificadores (ex. iniciais) das pessoas que fizeram labeling e revisão — não nomes completos, por minimização de dados mesmo em metadados internos."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Texto livre para justificar decisões ambíguas ou registar impacto da anonimização."
+    }
+  },
+
+  "required": [
+    "document_id", "category", "difficulty", "difficulty_tags",
+    "source_format", "page_count", "language", "capture_method",
+    "date", "document_number", "total", "currency", "supplier", "supplier_tax_id",
+    "vehicle_plate", "fuel_type",
+    "expected_movement_type", "expected_fuel_type",
+    "reviewed_by"
+  ],
+  "additionalProperties": false
+}
